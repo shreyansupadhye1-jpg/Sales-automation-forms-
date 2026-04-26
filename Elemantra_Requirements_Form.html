@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elemantra — Share Your Requirements</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#1a1a1a; --ink2:#4a4a4a; --ink3:#888;
+  --bg:#f7f5f0; --surface:#fff;
+  --accent:#c8602a; --accent2:#2a5c8a;
+  --border:#e0dbd2; --radius:14px;
+  --sans:"DM Sans",sans-serif; --serif:"DM Serif Display",serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);background:var(--bg);color:var(--ink);min-height:100vh;}
+
+/* HEADER */
+.header{background:var(--ink);padding:2.5rem 2rem 2rem;text-align:center;position:relative;overflow:hidden;}
+.header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 60%,rgba(200,96,42,.20) 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(42,92,138,.15) 0%,transparent 50%);}
+.header-eyebrow{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:.6rem;position:relative;}
+.header-title{font-family:var(--serif);font-size:clamp(1.8rem,4vw,2.8rem);color:#fff;line-height:1.1;margin-bottom:.6rem;position:relative;}
+.header-title em{color:var(--accent);font-style:italic;}
+.header-sub{font-size:13.5px;color:rgba(255,255,255,.5);max-width:440px;margin:0 auto;line-height:1.65;position:relative;}
+.header-promise{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:1.5rem;position:relative;}
+.promise-badge{font-size:11.5px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px;}
+.promise-badge::before{content:"✓";color:var(--accent);}
+
+/* FORM WRAP */
+.form-wrap{max-width:680px;margin:2.5rem auto;padding:0 1.25rem 3rem;}
+
+/* PROGRESS */
+.progress-bar{height:3px;background:var(--border);border-radius:2px;margin-bottom:2rem;overflow:hidden;}
+.progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .4s ease;}
+.progress-label{font-size:11.5px;color:var(--ink3);margin-bottom:.5rem;}
+
+/* CARDS */
+.form-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.75rem;margin-bottom:1rem;}
+.form-card-title{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:1.25rem;padding-bottom:.6rem;border-bottom:1px solid var(--border);}
+
+/* FIELDS */
+.form-row{display:grid;gap:12px;margin-bottom:12px;}
+.form-row-2{grid-template-columns:1fr 1fr;}
+.form-row-1{grid-template-columns:1fr;}
+.form-group{display:flex;flex-direction:column;gap:5px;}
+label{font-size:12.5px;font-weight:500;color:var(--ink2);}
+.field-hint{font-size:11px;color:var(--ink3);margin-top:-2px;}
+input[type=text],input[type=tel],input[type=number],select,textarea{
+  width:100%;padding:10px 13px;border:1px solid var(--border);border-radius:9px;
+  font-size:13.5px;font-family:var(--sans);color:var(--ink);background:var(--bg);
+  outline:none;transition:border-color .15s;
+}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);background:#fff;}
+textarea{resize:vertical;min-height:72px;}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;}
+
+/* CHECKBOX GRID */
+.check-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:4px;}
+.check-item{display:flex;align-items:center;gap:8px;padding:8px 10px;background:var(--bg);border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:12.5px;color:var(--ink2);transition:all .15s;user-select:none;}
+.check-item input{width:14px;height:14px;accent-color:var(--accent);flex-shrink:0;}
+.check-item:has(input:checked){background:#fdf0ea;border-color:var(--accent);color:var(--accent);font-weight:500;}
+
+/* ROOM ACCORDION */
+.room-accordion{margin-bottom:0;}
+.room-toggle{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.1rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;cursor:pointer;margin-bottom:6px;font-size:13.5px;font-weight:500;color:var(--ink);transition:border-color .15s;}
+.room-toggle:hover{border-color:var(--accent);}
+.room-toggle.active{border-color:var(--accent);background:#fdf0ea;color:var(--accent);}
+.toggle-arrow{font-size:11px;color:var(--ink3);transition:transform .2s;}
+.room-toggle.active .toggle-arrow{transform:rotate(180deg);}
+.room-fields{display:none;padding:1.1rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:6px;}
+.room-fields.open{display:block;}
+.room-check-row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.room-check-row .check-item{flex:0 0 auto;}
+
+/* SUBMIT */
+.submit-area{margin-top:1.5rem;}
+.form-submit{width:100%;padding:14px;border-radius:10px;background:var(--accent);color:#fff;font-size:15px;font-weight:600;font-family:var(--sans);border:none;cursor:pointer;transition:background .2s,transform .1s;}
+.form-submit:hover{background:#b85525;}
+.form-submit:active{transform:scale(.99);}
+.form-note{font-size:12px;color:var(--ink3);text-align:center;margin-top:.75rem;line-height:1.55;}
+
+/* SUCCESS */
+.success-screen{display:none;max-width:500px;margin:4rem auto;padding:0 1.5rem;text-align:center;}
+.success-icon{font-size:3.5rem;margin-bottom:1.25rem;}
+.success-title{font-family:var(--serif);font-size:2rem;color:var(--ink);margin-bottom:.75rem;}
+.success-sub{font-size:14.5px;color:var(--ink3);line-height:1.7;margin-bottom:2rem;}
+.success-steps{display:flex;flex-direction:column;gap:8px;text-align:left;}
+.success-step{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.85rem 1.1rem;font-size:13px;color:var(--ink2);display:flex;gap:10px;}
+.success-step-num{color:var(--accent);font-weight:600;flex-shrink:0;}
+
+footer{background:var(--ink);color:rgba(255,255,255,.35);text-align:center;font-size:12px;padding:1.25rem;letter-spacing:.04em;margin-top:3rem;}
+footer span{color:var(--accent);}
+
+@media(max-width:580px){
+  .form-row-2{grid-template-columns:1fr;}
+  .check-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <p class="header-eyebrow">Elemantra Interior Design</p>
+  <h1 class="header-title">Share your<br><em>requirements with us.</em></h1>
+  <p class="header-sub">Can't make a meeting right now? Fill this form and we'll prepare your layout, concept and estimate within 3–5 days.</p>
+  <div class="header-promise">
+    <span class="promise-badge">Takes ~5 minutes</span>
+    <span class="promise-badge">Layout plan in 3–5 days</span>
+    <span class="promise-badge">Concept &amp; BOQ included</span>
+    <span class="promise-badge">No commitment required</span>
+  </div>
+</div>
+
+<!-- FORM -->
+<div class="form-wrap" id="formWrap">
+  <p class="progress-label" id="progressLabel">Step 1 of 5 — Your Details</p>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:20%"></div></div>
+
+  <!-- STEP 1: YOUR DETAILS -->
+  <div class="form-step" id="step1">
+    <div class="form-card">
+      <div class="form-card-title">Your Details</div>
+      <div class="form-row form-row-2">
+        <div class="form-group"><label>Full Name *</label><input type="text" id="f_name" placeholder="e.g. Priya Sharma"></div>
+        <div class="form-group"><label>Phone Number *</label><input type="tel" id="f_phone" placeholder="e.g. 98XXX XXXXX"></div>
+      </div>
+      <div class="form-row form-row-2">
+        <div class="form-group"><label>Location / Area *</label><input type="text" id="f_location" placeholder="e.g. Andheri West, Mumbai"></div>
+        <div class="form-group"><label>Configuration *</label>
+          <select id="f_config">
+            <option value="">Select BHK</option>
+            <option>1 BHK</option><option>2 BHK</option><option>3 BHK</option>
+            <option>3.5 BHK</option><option>4 BHK</option><option>4+ BHK</option>
+            <option>Studio / Office</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row form-row-2">
+        <div class="form-group"><label>Carpet Area (sqft)</label><input type="number" id="f_area" placeholder="e.g. 1200"></div>
+        <div class="form-group"><label>Approximate Budget</label>
+          <select id="f_budget">
+            <option value="">Select range</option>
+            <option>Up to ₹10 Lakhs</option><option>₹10–20 Lakhs</option>
+            <option>₹20–35 Lakhs</option><option>₹35–50 Lakhs</option>
+            <option>₹50–75 Lakhs</option><option>₹75 Lakhs+</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row form-row-2">
+        <div class="form-group"><label>Family Members</label><input type="text" id="f_family" placeholder="e.g. Couple + 2 kids + parents"></div>
+        <div class="form-group"><label>Possession / Timeline</label><input type="text" id="f_timeline" placeholder="e.g. Ready / 4–5 months"></div>
+      </div>
+      <div class="form-row form-row-1">
+        <div class="form-group">
+          <label>Do you have a floor plan?</label>
+          <select id="f_plan">
+            <option value="">Select</option>
+            <option>Yes — PDF / JPG available</option>
+            <option>Yes — AutoCAD available</option>
+            <option>No floor plan yet</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="submit-area">
+      <button class="form-submit" onclick="goStep(2)">Next — General Scope →</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: GENERAL SCOPE -->
+  <div class="form-step" id="step2" style="display:none;">
+    <div class="form-card">
+      <div class="form-card-title">General Scope of Work</div>
+      <p style="font-size:12.5px;color:var(--ink3);margin-bottom:12px;">Select everything that applies to your project</p>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox"> Demolition of walls</label>
+        <label class="check-item"><input type="checkbox"> Construction of walls</label>
+        <label class="check-item"><input type="checkbox"> Redoing flooring</label>
+        <label class="check-item"><input type="checkbox"> False ceiling</label>
+        <label class="check-item"><input type="checkbox"> Electrical work</label>
+        <label class="check-item"><input type="checkbox"> Plumbing changes</label>
+        <label class="check-item"><input type="checkbox"> POP / Wall finish</label>
+        <label class="check-item"><input type="checkbox"> Painting</label>
+        <label class="check-item"><input type="checkbox"> Door frames &amp; laminates</label>
+        <label class="check-item"><input type="checkbox"> Safety door</label>
+        <label class="check-item"><input type="checkbox"> Modular kitchen</label>
+        <label class="check-item"><input type="checkbox"> Tile work</label>
+      </div>
+      <div class="form-row form-row-2" style="margin-top:14px;">
+        <div class="form-group">
+          <label>Flooring preference</label>
+          <select>
+            <option value="">Select</option>
+            <option>Vitrified tiles</option><option>Marble / Italian marble</option>
+            <option>Wooden / vinyl</option><option>Combination</option><option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Finish preference</label>
+          <select>
+            <option value="">Select</option>
+            <option>Laminate only</option>
+            <option>Laminate + Veneer (2 options)</option>
+            <option>Veneer + PU</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-card">
+      <div class="form-card-title">Living &amp; Dining Area</div>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox"> Shoe rack</label>
+        <label class="check-item"><input type="checkbox"> TV unit</label>
+        <label class="check-item"><input type="checkbox"> Mandir</label>
+        <label class="check-item"><input type="checkbox"> Crockery / sideboard</label>
+        <label class="check-item"><input type="checkbox"> Bar unit</label>
+        <label class="check-item"><input type="checkbox"> Console</label>
+        <label class="check-item"><input type="checkbox"> Wall panelling</label>
+        <label class="check-item"><input type="checkbox"> Book shelf</label>
+        <label class="check-item"><input type="checkbox"> Dining table</label>
+      </div>
+      <div class="form-row form-row-1" style="margin-top:12px;">
+        <div class="form-group"><label>Additional notes</label><textarea placeholder="e.g. 6-seater dining, L-shaped sofa, projector, hidden bar, mandir with doors..."></textarea></div>
+      </div>
+    </div>
+    <div class="form-card">
+      <div class="form-card-title">Kitchen</div>
+      <div class="form-row form-row-2">
+        <div class="form-group"><label>Kitchen layout</label>
+          <select><option value="">Select</option><option>Open</option><option>Semi-open</option><option>Closed</option></select>
+        </div>
+        <div class="form-group"><label>Kitchen type</label>
+          <select><option value="">Select</option><option>Fully modular</option><option>Semi modular</option><option>Counter redo only</option></select>
+        </div>
+      </div>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox"> Base units</label>
+        <label class="check-item"><input type="checkbox"> Wall units</label>
+        <label class="check-item"><input type="checkbox"> Loft storage</label>
+        <label class="check-item"><input type="checkbox"> Tall unit</label>
+        <label class="check-item"><input type="checkbox"> Counter redoing</label>
+        <label class="check-item"><input type="checkbox"> Plumbing changes</label>
+      </div>
+      <div class="form-row form-row-1" style="margin-top:12px;">
+        <div class="form-group"><label>Kitchen notes</label><textarea placeholder="e.g. Provision for dishwasher, chimney, open kitchen, utility area for washing machine..."></textarea></div>
+      </div>
+    </div>
+    <div class="submit-area">
+      <button class="form-submit" onclick="goStep(3)">Next — Bedrooms →</button>
+      <p class="form-note" style="margin-top:.5rem;cursor:pointer;" onclick="goStep(1)">← Back</p>
+    </div>
+  </div>
+
+  <!-- STEP 3: BEDROOMS -->
+  <div class="form-step" id="step3" style="display:none;">
+    <div class="form-card">
+      <div class="form-card-title">Bedrooms</div>
+      <p style="font-size:12.5px;color:var(--ink3);margin-bottom:14px;">Tap a bedroom to expand its requirements</p>
+      <div class="room-accordion">
+
+        <div class="room-toggle" onclick="toggleRoom(this,'r_master')">
+          <span>Master Bedroom</span><span class="toggle-arrow">▼</span>
+        </div>
+        <div class="room-fields" id="r_master">
+          <div class="room-check-row">
+            <label class="check-item"><input type="checkbox"> Bed</label>
+            <label class="check-item"><input type="checkbox"> Side tables</label>
+            <label class="check-item"><input type="checkbox"> Wardrobe</label>
+            <label class="check-item"><input type="checkbox"> TV unit</label>
+            <label class="check-item"><input type="checkbox"> Dresser</label>
+            <label class="check-item"><input type="checkbox"> Study table</label>
+            <label class="check-item"><input type="checkbox"> Window seat</label>
+          </div>
+          <div class="form-group"><label>Bed size</label>
+            <select><option value="">Select</option><option>Single</option><option>Queen (5×6)</option><option>King (6×6)</option><option>Custom</option></select>
+          </div>
+          <div class="form-group" style="margin-top:8px;"><label>Notes</label><textarea placeholder="e.g. Hydraulic storage, walk-in wardrobe via duct, murphy bed..."></textarea></div>
+        </div>
+
+        <div class="room-toggle" onclick="toggleRoom(this,'r_bed2')">
+          <span>Bedroom 2</span><span class="toggle-arrow">▼</span>
+        </div>
+        <div class="room-fields" id="r_bed2">
+          <div class="form-group"><label>Who uses this room?</label><input type="text" placeholder="e.g. Parents, kids, guest room..."></div>
+          <div class="room-check-row" style="margin-top:10px;">
+            <label class="check-item"><input type="checkbox"> Bed</label>
+            <label class="check-item"><input type="checkbox"> Side tables</label>
+            <label class="check-item"><input type="checkbox"> Wardrobe</label>
+            <label class="check-item"><input type="checkbox"> TV unit</label>
+            <label class="check-item"><input type="checkbox"> Dresser</label>
+            <label class="check-item"><input type="checkbox"> Study table</label>
+          </div>
+          <div class="form-group" style="margin-top:8px;"><label>Notes</label><textarea placeholder="Additional requirements..."></textarea></div>
+        </div>
+
+        <div class="room-toggle" onclick="toggleRoom(this,'r_bed3')">
+          <span>Bedroom 3</span><span class="toggle-arrow">▼</span>
+        </div>
+        <div class="room-fields" id="r_bed3">
+          <div class="form-group"><label>Who uses this room?</label><input type="text" placeholder="e.g. Parents, kids, guest room..."></div>
+          <div class="room-check-row" style="margin-top:10px;">
+            <label class="check-item"><input type="checkbox"> Bed</label>
+            <label class="check-item"><input type="checkbox"> Side tables</label>
+            <label class="check-item"><input type="checkbox"> Wardrobe</label>
+            <label class="check-item"><input type="checkbox"> TV unit</label>
+            <label class="check-item"><input type="checkbox"> Dresser</label>
+            <label class="check-item"><input type="checkbox"> Study table</label>
+          </div>
+          <div class="form-group" style="margin-top:8px;"><label>Notes</label><textarea placeholder="Additional requirements..."></textarea></div>
+        </div>
+
+        <div class="room-toggle" onclick="toggleRoom(this,'r_bed4')">
+          <span>Bedroom 4 / Extra room</span><span class="toggle-arrow">▼</span>
+        </div>
+        <div class="room-fields" id="r_bed4">
+          <div class="form-group"><label>Who uses this room?</label><input type="text" placeholder="e.g. Grandparents, maid's room, study..."></div>
+          <div class="room-check-row" style="margin-top:10px;">
+            <label class="check-item"><input type="checkbox"> Bed</label>
+            <label class="check-item"><input type="checkbox"> Side tables</label>
+            <label class="check-item"><input type="checkbox"> Wardrobe</label>
+            <label class="check-item"><input type="checkbox"> TV unit</label>
+            <label class="check-item"><input type="checkbox"> Dresser</label>
+            <label class="check-item"><input type="checkbox"> Study table</label>
+          </div>
+          <div class="form-group" style="margin-top:8px;"><label>Notes</label><textarea placeholder="Additional requirements..."></textarea></div>
+        </div>
+
+      </div>
+    </div>
+    <div class="submit-area">
+      <button class="form-submit" onclick="goStep(4)">Next — Bathrooms →</button>
+      <p class="form-note" style="margin-top:.5rem;cursor:pointer;" onclick="goStep(2)">← Back</p>
+    </div>
+  </div>
+
+  <!-- STEP 4: BATHROOMS -->
+  <div class="form-step" id="step4" style="display:none;">
+    <div class="form-card">
+      <div class="form-card-title">Bathrooms</div>
+      <p style="font-size:12.5px;color:var(--ink3);margin-bottom:14px;">Select what's needed across your bathrooms</p>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox"> Vanity unit</label>
+        <label class="check-item"><input type="checkbox"> Vanity counter</label>
+        <label class="check-item"><input type="checkbox"> Mirror</label>
+        <label class="check-item"><input type="checkbox"> Shower partition</label>
+        <label class="check-item"><input type="checkbox"> Wall tiling</label>
+        <label class="check-item"><input type="checkbox"> Floor tiling</label>
+        <label class="check-item"><input type="checkbox"> Plumbing changes</label>
+        <label class="check-item"><input type="checkbox"> New toilet door</label>
+        <label class="check-item"><input type="checkbox"> Sanitary fittings</label>
+        <label class="check-item"><input type="checkbox"> Geyser provision</label>
+        <label class="check-item"><input type="checkbox"> Exhaust fan</label>
+        <label class="check-item"><input type="checkbox"> Complete redo</label>
+      </div>
+      <div class="form-row form-row-1" style="margin-top:14px;">
+        <div class="form-group"><label>Bathroom notes</label><textarea placeholder="e.g. Complete redo of master bath, shower partition in common toilet only, shift plumbing for kitchen..."></textarea></div>
+      </div>
+    </div>
+    <div class="submit-area">
+      <button class="form-submit" onclick="goStep(5)">Next — Final Notes →</button>
+      <p class="form-note" style="margin-top:.5rem;cursor:pointer;" onclick="goStep(3)">← Back</p>
+    </div>
+  </div>
+
+  <!-- STEP 5: FINAL NOTES -->
+  <div class="form-step" id="step5" style="display:none;">
+    <div class="form-card">
+      <div class="form-card-title">Design Preferences &amp; Anything Else</div>
+      <div class="form-row form-row-1">
+        <div class="form-group">
+          <label>Colour / material preferences</label>
+          <textarea placeholder="e.g. Neutral palette, marble + veneer, no dark colours, lots of white, sage green accents..."></textarea>
+        </div>
+      </div>
+      <div class="form-row form-row-1">
+        <div class="form-group">
+          <label>Special requirements</label>
+          <textarea placeholder="e.g. Vastu compliance, lots of storage, kid-friendly, accessibility needs, projector, home theatre, pet-friendly..."></textarea>
+        </div>
+      </div>
+      <div class="form-row form-row-1">
+        <div class="form-group">
+          <label>Appliances to accommodate</label>
+          <textarea placeholder="e.g. Double door refrigerator, dishwasher, washing machine + dryer, wine fridge..."></textarea>
+        </div>
+      </div>
+      <div class="form-row form-row-2">
+        <div class="form-group">
+          <label>Need 2 finish options in BOQ?</label>
+          <select>
+            <option value="">Select</option>
+            <option>Yes — Laminate + Veneer</option>
+            <option>Yes — Laminate + Backpainted glass</option>
+            <option>No — one option is fine</option>
+            <option>Not sure</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>How did you hear about us?</label>
+          <select>
+            <option value="">Select</option>
+            <option>Instagram</option><option>Google</option>
+            <option>Referral / friend</option><option>Facebook</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="submit-area">
+      <button class="form-submit" onclick="submitForm()">Submit My Requirements ✓</button>
+      <p class="form-note">We'll confirm receipt within 24 hours. Your layout, concept &amp; estimate will be ready in 3–5 days.</p>
+      <p class="form-note" style="margin-top:.4rem;cursor:pointer;" onclick="goStep(4)">← Back</p>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS SCREEN -->
+<div class="success-screen" id="successScreen">
+  <div class="success-icon">🏡</div>
+  <div class="success-title">We've got your requirements!</div>
+  <p class="success-sub">Thank you. Our team will review everything and reach out within 24 hours to confirm. Here's what happens next:</p>
+  <div class="success-steps">
+    <div class="success-step"><span class="success-step-num">Day 1</span> Our team reviews your requirements and contacts you to confirm details.</div>
+    <div class="success-step"><span class="success-step-num">Day 2–3</span> We prepare a scaled furniture layout for your space.</div>
+    <div class="success-step"><span class="success-step-num">Day 3–5</span> Concept presentation and rough BOQ estimate are ready.</div>
+    <div class="success-step"><span class="success-step-num">Day 5+</span> We share everything with you and schedule a review call.</div>
+  </div>
+</div>
+
+<footer>
+  <p>Elemantra Interior Design &amp; Fit-out · <span>elemantra.in</span></p>
+</footer>
+
+<script>
+const steps = 5;
+const stepLabels = [
+  "Step 1 of 5 — Your Details",
+  "Step 2 of 5 — Scope & Living Areas",
+  "Step 3 of 5 — Bedrooms",
+  "Step 4 of 5 — Bathrooms",
+  "Step 5 of 5 — Design Preferences"
+];
+
+function goStep(n) {
+  // Validate step 1 required fields
+  if (n > 1) {
+    const name = document.getElementById("f_name").value.trim();
+    const phone = document.getElementById("f_phone").value.trim();
+    const loc = document.getElementById("f_location").value.trim();
+    const cfg = document.getElementById("f_config").value;
+    if (!name || !phone || !loc || !cfg) {
+      alert("Please fill in your Name, Phone, Location and Configuration before continuing.");
+      goStep(1); return;
+    }
+  }
+  for (let i = 1; i <= steps; i++) {
+    document.getElementById("step" + i).style.display = i === n ? "block" : "none";
+  }
+  document.getElementById("progressLabel").textContent = stepLabels[n - 1];
+  document.getElementById("progressFill").style.width = (n / steps * 100) + "%";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function toggleRoom(btn, id) {
+  const fields = document.getElementById(id);
+  const isOpen = fields.classList.contains("open");
+  fields.classList.toggle("open", !isOpen);
+  btn.classList.toggle("active", !isOpen);
+}
+
+function submitForm() {
+  document.getElementById("formWrap").style.display = "none";
+  document.getElementById("successScreen").style.display = "block";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+</script>
+</body>
+</html>
