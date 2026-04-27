@@ -460,6 +460,9 @@ const bhkToBedrooms = {
   "Other": 4
 };
 
+// Submission state flag to prevent double submissions
+let isSubmitting = false;
+
 // Initialize event listener for config change
 document.addEventListener("DOMContentLoaded", function() {
   const configSelect = document.getElementById("f_config");
@@ -580,26 +583,11 @@ function validateStep1() {
 
 function validateStep2() {
   const hasGeneralScope = document.querySelectorAll("#step2 .form-card:first-of-type .check-grid input:checked").length > 0;
-  const hasLivingDining = document.querySelectorAll("#step2 .form-card:nth-of-type(2) .check-grid input:checked").length > 0;
-  const kitchenLayout = document.getElementById("f_kitchen_layout").value;
-  const kitchenType = document.getElementById("f_kitchen_type").value;
   
   const errors = [];
   
   if (!hasGeneralScope) {
     errors.push("Please select at least one item from General Scope of Work");
-  }
-  
-  if (!hasLivingDining) {
-    errors.push("Please select at least one item from Living & Dining Area");
-  }
-  
-  if (!kitchenLayout) {
-    errors.push("Kitchen layout is required");
-  }
-  
-  if (!kitchenType) {
-    errors.push("Kitchen type is required");
   }
   
   if (errors.length > 0) {
@@ -750,6 +738,11 @@ function collectFormData() {
 }
 
 function submitForm() {
+  // Prevent double submission
+  if (isSubmitting) {
+    return;
+  }
+  
   if (!validateFinalSubmission()) {
     return;
   }
@@ -757,6 +750,16 @@ function submitForm() {
   if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === "YOUR_APPS_SCRIPT_URL_HERE") {
     alert("⚠️ Please update the APPS_SCRIPT_URL at the top of the script before submitting.");
     return;
+  }
+
+  // Set flag and disable button
+  isSubmitting = true;
+  const submitButton = document.querySelector(".form-submit");
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.style.opacity = "0.6";
+    submitButton.style.cursor = "not-allowed";
+    submitButton.textContent = "Submitting...";
   }
 
   const formData = collectFormData();
@@ -774,7 +777,17 @@ function submitForm() {
     document.getElementById("successScreen").style.display = "block";
     window.scrollTo({ top: 0, behavior: "smooth" });
   })
-  .catch(err => console.error("Submission error:", err));
+  .catch(err => {
+    console.error("Submission error:", err);
+    // Reset on error so user can retry
+    isSubmitting = false;
+    if (submitButton) {
+      submitButton.disabled = false;
+      submitButton.style.opacity = "1";
+      submitButton.style.cursor = "pointer";
+      submitButton.textContent = "Submit My Requirements ✓";
+    }
+  });
 }
 </script>
 </body>
