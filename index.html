@@ -132,7 +132,7 @@ footer span{color:var(--accent);}
           <select id="f_config">
             <option value="">Select BHK</option>
             <option>1 BHK</option><option>2 BHK</option><option>3 BHK</option>
-            <option>3.5 BHK</option><option>4 BHK</option><option>4+ BHK</option>
+            <option>4 BHK</option><option>4+ BHK</option>
             <option>Studio / Office</option><option>Other</option>
           </select>
         </div>
@@ -191,7 +191,7 @@ footer span{color:var(--accent);}
       <div class="form-row form-row-2" style="margin-top:14px;">
         <div class="form-group">
           <label>Flooring preference</label>
-          <select>
+          <select id="f_flooring_pref">
             <option value="">Select</option>
             <option>Vitrified tiles</option><option>Marble / Italian marble</option>
             <option>Wooden / vinyl</option><option>Combination</option><option>Not sure yet</option>
@@ -199,7 +199,7 @@ footer span{color:var(--accent);}
         </div>
         <div class="form-group">
           <label>Finish preference</label>
-          <select>
+          <select id="f_finish_pref">
             <option value="">Select</option>
             <option>Laminate only</option>
             <option>Laminate + Veneer (2 options)</option>
@@ -223,17 +223,17 @@ footer span{color:var(--accent);}
         <label class="check-item"><input type="checkbox"> Dining table</label>
       </div>
       <div class="form-row form-row-1" style="margin-top:12px;">
-        <div class="form-group"><label>Additional notes</label><textarea placeholder="e.g. 6-seater dining, L-shaped sofa, projector, hidden bar, mandir with doors..."></textarea></div>
+        <div class="form-group"><label>Additional notes</label><textarea id="f_dining_notes" placeholder="e.g. 6-seater dining, L-shaped sofa, projector, hidden bar, mandir with doors..."></textarea></div>
       </div>
     </div>
     <div class="form-card">
       <div class="form-card-title">Kitchen</div>
       <div class="form-row form-row-2">
         <div class="form-group"><label>Kitchen layout</label>
-          <select><option value="">Select</option><option>Open</option><option>Semi-open</option><option>Closed</option></select>
+          <select id="f_kitchen_layout"><option value="">Select</option><option>Open</option><option>Semi-open</option><option>Closed</option></select>
         </div>
         <div class="form-group"><label>Kitchen type</label>
-          <select><option value="">Select</option><option>Fully modular</option><option>Semi modular</option><option>Counter redo only</option></select>
+          <select id="f_kitchen_type"><option value="">Select</option><option>Fully modular</option><option>Semi modular</option><option>Counter redo only</option></select>
         </div>
       </div>
       <div class="check-grid">
@@ -245,7 +245,7 @@ footer span{color:var(--accent);}
         <label class="check-item"><input type="checkbox"> Plumbing changes</label>
       </div>
       <div class="form-row form-row-1" style="margin-top:12px;">
-        <div class="form-group"><label>Kitchen notes</label><textarea placeholder="e.g. Provision for dishwasher, chimney, open kitchen, utility area for washing machine..."></textarea></div>
+        <div class="form-group"><label>Kitchen notes</label><textarea id="f_kitchen_notes" placeholder="e.g. Provision for dishwasher, chimney, open kitchen, utility area for washing machine..."></textarea></div>
       </div>
     </div>
     <div class="submit-area">
@@ -275,16 +275,16 @@ footer span{color:var(--accent);}
             <label class="check-item"><input type="checkbox"> Window seat</label>
           </div>
           <div class="form-group"><label>Bed size</label>
-            <select><option value="">Select</option><option>Single</option><option>Queen (5×6)</option><option>King (6×6)</option><option>Custom</option></select>
+            <select id="f_master_bed_size"><option value="">Select</option><option>Single</option><option>Queen (5×6)</option><option>King (6×6)</option><option>Custom</option></select>
           </div>
-          <div class="form-group" style="margin-top:8px;"><label>Notes</label><textarea placeholder="e.g. Hydraulic storage, walk-in wardrobe via duct, murphy bed..."></textarea></div>
+          <div class="form-group" style="margin-top:8px;"><label>Notes</label><textarea id="f_master_notes" placeholder="e.g. Hydraulic storage, walk-in wardrobe via duct, murphy bed..."></textarea></div>
         </div>
 
         <div class="room-toggle" onclick="toggleRoom(this,'r_bed2')">
           <span>Bedroom 2</span><span class="toggle-arrow">▼</span>
         </div>
         <div class="room-fields" id="r_bed2">
-          <div class="form-group"><label>Who uses this room?</label><input type="text" placeholder="e.g. Parents, kids, guest room..."></div>
+          <div class="form-group"><label>Who uses this room?</label><input type="text" id="f_bed2_user" placeholder="e.g. Parents, kids, guest room..."></div>
           <div class="room-check-row" style="margin-top:10px;">
             <label class="check-item"><input type="checkbox"> Bed</label>
             <label class="check-item"><input type="checkbox"> Side tables</label>
@@ -293,14 +293,14 @@ footer span{color:var(--accent);}
             <label class="check-item"><input type="checkbox"> Dresser</label>
             <label class="check-item"><input type="checkbox"> Study table</label>
           </div>
-          <div class="form-group" style="margin-top:8px;"><label>Notes</label><textarea placeholder="Additional requirements..."></textarea></div>
+          <div class="form-group" style="margin-top:8px;"><label>Notes</label><textarea id="f_bed2_notes" placeholder="Additional requirements..."></textarea></div>
         </div>
 
         <div class="room-toggle" onclick="toggleRoom(this,'r_bed3')">
           <span>Bedroom 3</span><span class="toggle-arrow">▼</span>
         </div>
         <div class="room-fields" id="r_bed3">
-          <div class="form-group"><label>Who uses this room?</label><input type="text" placeholder="e.g. Parents, kids, guest room..."></div>
+          <div class="form-group"><label>Who uses this room?</label><input type="text" id="f_bed3_user" placeholder="e.g. Parents, kids, guest room..."></div>
           <div class="room-check-row" style="margin-top:10px;">
             <label class="check-item"><input type="checkbox"> Bed</label>
             <label class="check-item"><input type="checkbox"> Side tables</label>
@@ -309,14 +309,14 @@ footer span{color:var(--accent);}
             <label class="check-item"><input type="checkbox"> Dresser</label>
             <label class="check-item"><input type="checkbox"> Study table</label>
           </div>
-          <div class="form-group" style="margin-top:8px;"><label>Notes</label><textarea placeholder="Additional requirements..."></textarea></div>
+          <div class="form-group" style="margin-top:8px;"><label>Notes</label><textarea id="f_bed3_notes" placeholder="Additional requirements..."></textarea></div>
         </div>
 
         <div class="room-toggle" onclick="toggleRoom(this,'r_bed4')">
           <span>Bedroom 4 / Extra room</span><span class="toggle-arrow">▼</span>
         </div>
         <div class="room-fields" id="r_bed4">
-          <div class="form-group"><label>Who uses this room?</label><input type="text" placeholder="e.g. Grandparents, maid's room, study..."></div>
+          <div class="form-group"><label>Who uses this room?</label><input type="text" id="f_bed4_user" placeholder="e.g. Grandparents, maid's room, study..."></div>
           <div class="room-check-row" style="margin-top:10px;">
             <label class="check-item"><input type="checkbox"> Bed</label>
             <label class="check-item"><input type="checkbox"> Side tables</label>
@@ -325,7 +325,7 @@ footer span{color:var(--accent);}
             <label class="check-item"><input type="checkbox"> Dresser</label>
             <label class="check-item"><input type="checkbox"> Study table</label>
           </div>
-          <div class="form-group" style="margin-top:8px;"><label>Notes</label><textarea placeholder="Additional requirements..."></textarea></div>
+          <div class="form-group" style="margin-top:8px;"><label>Notes</label><textarea id="f_bed4_notes" placeholder="Additional requirements..."></textarea></div>
         </div>
 
       </div>
@@ -356,7 +356,7 @@ footer span{color:var(--accent);}
         <label class="check-item"><input type="checkbox"> Complete redo</label>
       </div>
       <div class="form-row form-row-1" style="margin-top:14px;">
-        <div class="form-group"><label>Bathroom notes</label><textarea placeholder="e.g. Complete redo of master bath, shower partition in common toilet only, shift plumbing for kitchen..."></textarea></div>
+        <div class="form-group"><label>Bathroom notes</label><textarea id="f_bathroom_notes" placeholder="e.g. Complete redo of master bath, shower partition in common toilet only, shift plumbing for kitchen..."></textarea></div>
       </div>
     </div>
     <div class="submit-area">
@@ -372,25 +372,25 @@ footer span{color:var(--accent);}
       <div class="form-row form-row-1">
         <div class="form-group">
           <label>Colour / material preferences</label>
-          <textarea placeholder="e.g. Neutral palette, marble + veneer, no dark colours, lots of white, sage green accents..."></textarea>
+          <textarea id="f_colour_pref" placeholder="e.g. Neutral palette, marble + veneer, no dark colours, lots of white, sage green accents..."></textarea>
         </div>
       </div>
       <div class="form-row form-row-1">
         <div class="form-group">
           <label>Special requirements</label>
-          <textarea placeholder="e.g. Vastu compliance, lots of storage, kid-friendly, accessibility needs, projector, home theatre, pet-friendly..."></textarea>
+          <textarea id="f_special_req" placeholder="e.g. Vastu compliance, lots of storage, kid-friendly, accessibility needs, projector, home theatre, pet-friendly..."></textarea>
         </div>
       </div>
       <div class="form-row form-row-1">
         <div class="form-group">
           <label>Appliances to accommodate</label>
-          <textarea placeholder="e.g. Double door refrigerator, dishwasher, washing machine + dryer, wine fridge..."></textarea>
+          <textarea id="f_appliances" placeholder="e.g. Double door refrigerator, dishwasher, washing machine + dryer, wine fridge..."></textarea>
         </div>
       </div>
       <div class="form-row form-row-2">
         <div class="form-group">
           <label>Need 2 finish options in BOQ?</label>
-          <select>
+          <select id="f_boq_options">
             <option value="">Select</option>
             <option>Yes — Laminate + Veneer</option>
             <option>Yes — Laminate + Backpainted glass</option>
@@ -400,7 +400,7 @@ footer span{color:var(--accent);}
         </div>
         <div class="form-group">
           <label>How did you hear about us?</label>
-          <select>
+          <select id="f_how_heard">
             <option value="">Select</option>
             <option>Instagram</option><option>Google</option>
             <option>Referral / friend</option><option>Facebook</option><option>Other</option>
@@ -448,82 +448,312 @@ const stepLabels = [
   "Step 5 of 5 — Design Preferences"
 ];
 
-function goStep(n) {
-  // Validate step 1 required fields
-  if (n > 1) {
-    const name = document.getElementById("f_name").value.trim();
-    const phone = document.getElementById("f_phone").value.trim();
-    const loc = document.getElementById("f_location").value.trim();
-    const cfg = document.getElementById("f_config").value;
-    if (!name || !phone || !loc || !cfg) {
-      alert("Please fill in your Name, Phone, Location and Configuration before continuing.");
-      goStep(1); return;
-    }
+// Map BHK to number of bedrooms
+const bhkToBedrooms = {
+  "1 BHK": 1,
+  "2 BHK": 2,
+  "3 BHK": 3,
+  "3.5 BHK": 3,
+  "4 BHK": 4,
+  "4+ BHK": 4,
+  "Studio / Office": 0,
+  "Other": 4
+};
+
+// Initialize event listener for config change
+document.addEventListener("DOMContentLoaded", function() {
+  const configSelect = document.getElementById("f_config");
+  if (configSelect) {
+    configSelect.addEventListener("change", updateBedroomVisibility);
   }
+});
+
+// Show/hide bedrooms based on BHK selection
+function updateBedroomVisibility() {
+  const config = document.getElementById("f_config").value;
+  const numBedrooms = bhkToBedrooms[config] || 0;
+  
+  const bedroomIds = ["r_master", "r_bed2", "r_bed3", "r_bed4"];
+  const bedroomToggles = document.querySelectorAll(".room-toggle");
+  
+  bedroomToggles.forEach((toggle, index) => {
+    if (index < numBedrooms) {
+      toggle.style.display = "block";
+      document.getElementById(bedroomIds[index]).style.display = "block";
+    } else {
+      toggle.style.display = "none";
+      document.getElementById(bedroomIds[index]).style.display = "none";
+    }
+  });
+}
+
+function goStep(n) {
+  // Validate current step before moving forward
+  if (n > 1) {
+    const currentStep = 1;
+    if (!validateStep1()) return;
+  }
+  
+  if (n > 2) {
+    if (!validateStep2()) return;
+  }
+  
+  if (n > 3) {
+    if (!validateStep3()) return;
+  }
+  
+  if (n > 4) {
+    if (!validateStep4()) return;
+  }
+  
   for (let i = 1; i <= steps; i++) {
     document.getElementById("step" + i).style.display = i === n ? "block" : "none";
   }
   document.getElementById("progressLabel").textContent = stepLabels[n - 1];
   document.getElementById("progressFill").style.width = (n / steps * 100) + "%";
   window.scrollTo({ top: 0, behavior: "smooth" });
+  
+  // Auto-expand bedrooms based on BHK when reaching step 3
+  if (n === 3) {
+    setTimeout(() => {
+      const config = document.getElementById("f_config").value;
+      const numBedrooms = bhkToBedrooms[config] || 0;
+      const bedroomIds = ["r_master", "r_bed2", "r_bed3", "r_bed4"];
+      const bedroomToggles = document.querySelectorAll(".room-toggle");
+      
+      bedroomToggles.forEach((toggle, index) => {
+        const fieldsDiv = document.getElementById(bedroomIds[index]);
+        if (index < numBedrooms) {
+          // Auto-expand bedroom
+          fieldsDiv.classList.add("open");
+          toggle.classList.add("active");
+        } else {
+          // Collapse hidden bedrooms
+          fieldsDiv.classList.remove("open");
+          toggle.classList.remove("active");
+        }
+      });
+    }, 100);
+  }
 }
 
-function toggleRoom(btn, id) {
-  const fields = document.getElementById(id);
-  const isOpen = fields.classList.contains("open");
-  fields.classList.toggle("open", !isOpen);
-  btn.classList.toggle("active", !isOpen);
+function validateStep1() {
+  const name = document.getElementById("f_name").value.trim();
+  const phone = document.getElementById("f_phone").value.trim();
+  const location = document.getElementById("f_location").value.trim();
+  const config = document.getElementById("f_config").value;
+  
+  const errors = [];
+  
+  // Validate name
+  if (!name) {
+    errors.push("Full Name is required");
+  } else if (name.length < 2) {
+    errors.push("Full Name must be at least 2 characters");
+  }
+  
+  // Validate phone
+  if (!phone) {
+    errors.push("Phone Number is required");
+  } else if (!/^\d{10}$|^\d{12}$|^\+\d{10,}$/.test(phone.replace(/[\s\-()]/g, ""))) {
+    errors.push("Phone Number must be at least 10 digits");
+  }
+  
+  // Validate location
+  if (!location) {
+    errors.push("Location/Area is required");
+  } else if (location.length < 2) {
+    errors.push("Location must be at least 2 characters");
+  }
+  
+  // Validate configuration
+  if (!config) {
+    errors.push("Configuration (BHK) is required");
+  }
+  
+  if (errors.length > 0) {
+    alert("❌ Please fix these errors:\n\n" + errors.join("\n"));
+    return false;
+  }
+  return true;
+}
+
+function validateStep2() {
+  const hasGeneralScope = document.querySelectorAll("#step2 .form-card:first-of-type .check-grid input:checked").length > 0;
+  const hasLivingDining = document.querySelectorAll("#step2 .form-card:nth-of-type(2) .check-grid input:checked").length > 0;
+  const kitchenLayout = document.getElementById("f_kitchen_layout").value;
+  const kitchenType = document.getElementById("f_kitchen_type").value;
+  
+  const errors = [];
+  
+  if (!hasGeneralScope) {
+    errors.push("Please select at least one item from General Scope of Work");
+  }
+  
+  if (!hasLivingDining) {
+    errors.push("Please select at least one item from Living & Dining Area");
+  }
+  
+  if (!kitchenLayout) {
+    errors.push("Kitchen layout is required");
+  }
+  
+  if (!kitchenType) {
+    errors.push("Kitchen type is required");
+  }
+  
+  if (errors.length > 0) {
+    alert("❌ Please fix these errors:\n\n" + errors.join("\n"));
+    return false;
+  }
+  return true;
+}
+
+function validateStep3() {
+  const config = document.getElementById("f_config").value;
+  const numBedrooms = bhkToBedrooms[config] || 0;
+  const errors = [];
+  
+  for (let i = 1; i <= numBedrooms; i++) {
+    const bedroomId = i === 1 ? "r_master" : `r_bed${i}`;
+    const hasItems = document.querySelectorAll(`#${bedroomId} .room-check-row input:checked`).length > 0;
+    
+    if (!hasItems && i > 1) {
+      const user = document.getElementById(`f_bed${i}_user`).value.trim();
+      if (user && !hasItems) {
+        errors.push(`Bedroom ${i}: Please select at least one furniture item`);
+      }
+    }
+  }
+  
+  if (errors.length > 0) {
+    alert("⚠️ Recommendations:\n\n" + errors.join("\n"));
+    // Don't prevent submission, just warn
+  }
+  return true;
+}
+
+function validateStep4() {
+  const hasBathroomItems = document.querySelectorAll("#step4 .check-grid input:checked").length > 0;
+  
+  if (!hasBathroomItems) {
+    const proceed = confirm("⚠️ No bathroom items selected. Continue anyway?");
+    return proceed;
+  }
+  return true;
+}
+
+function validateFinalSubmission() {
+  const name = document.getElementById("f_name").value.trim();
+  const phone = document.getElementById("f_phone").value.trim();
+  const location = document.getElementById("f_location").value.trim();
+  const config = document.getElementById("f_config").value;
+  
+  const errors = [];
+  
+  if (!name || !phone || !location || !config) {
+    errors.push("Required fields are missing");
+  }
+  
+  if (errors.length > 0) {
+    alert("❌ Cannot submit:\n\n" + errors.join("\n"));
+    return false;
+  }
+  return true;
 }
 
 function collectFormData() {
-  const data = {
-    "Submitted At": new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
-    "Name": document.getElementById("f_name").value.trim(),
-    "Phone": document.getElementById("f_phone").value.trim(),
-    "Location": document.getElementById("f_location").value.trim(),
-    "Configuration": document.getElementById("f_config").value,
-    "Carpet Area (sqft)": document.getElementById("f_area").value || "Not specified",
-    "Budget": document.getElementById("f_budget").value || "Not specified",
-    "Family Members": document.getElementById("f_family").value || "Not specified",
-    "Timeline / Possession": document.getElementById("f_timeline").value || "Not specified",
-    "Floor Plan Available": document.getElementById("f_plan").value || "Not specified",
-    
-    // General Scope
-    "General Scope": Array.from(document.querySelectorAll("#step2 .check-grid:first-of-type .check-item input:checked")).map(c => c.parentElement.innerText.trim()).join(", ") || "None selected",
-    "Flooring Preference": document.querySelector("#step2 .form-row-2:nth-of-type(1) select").value || "Not specified",
-    "Finish Preference": document.querySelector("#step2 .form-row-2:nth-of-type(1) select:nth-of-type(2)").value || "Not specified",
-    
-    // Living & Dining
-    "Living & Dining Items": Array.from(document.querySelectorAll("#step2 .form-card:nth-of-type(2) .check-grid .check-item input:checked")).map(c => c.parentElement.innerText.trim()).join(", ") || "None selected",
-    "Living & Dining Notes": document.querySelector("#step2 .form-card:nth-of-type(2) textarea").value || "None",
-    
-    // Kitchen
-    "Kitchen Layout": document.querySelector("#step2 .form-card:nth-of-type(3) select").value || "Not specified",
-    "Kitchen Type": document.querySelector("#step2 .form-card:nth-of-type(3) select:nth-of-type(2)").value || "Not specified",
-    "Kitchen Items": Array.from(document.querySelectorAll("#step2 .form-card:nth-of-type(3) .check-grid .check-item input:checked")).map(c => c.parentElement.innerText.trim()).join(", ") || "None selected",
-    "Kitchen Notes": document.querySelector("#step2 .form-card:nth-of-type(3) textarea").value || "None",
-    
-    // Bedrooms (from accordion)
-    "Master Bedroom": document.querySelector("#r_master textarea").value || "None",
-    "Bedroom 2": document.querySelector("#r_bed2 textarea").value || "None",
-    "Bedroom 3": document.querySelector("#r_bed3 textarea").value || "None",
-    "Bedroom 4 / Extra": document.querySelector("#r_bed4 textarea").value || "None",
-    
-    // Bathrooms
-    "Bathroom Items": Array.from(document.querySelectorAll("#step4 .check-grid .check-item input:checked")).map(c => c.parentElement.innerText.trim()).join(", ") || "None selected",
-    "Bathroom Notes": document.querySelector("#step4 textarea").value || "None",
-    
-    // Final preferences
-    "Colour / Material Preferences": document.querySelector("#step5 .form-row:nth-of-type(1) textarea").value || "None",
-    "Special Requirements": document.querySelector("#step5 .form-row:nth-of-type(2) textarea").value || "None",
-    "Appliances": document.querySelector("#step5 .form-row:nth-of-type(3) textarea").value || "None",
-    "BOQ Options Needed": document.querySelector("#step5 .form-row-2 select").value || "Not specified",
-    "How They Heard": document.querySelector("#step5 .form-row-2 select:nth-of-type(2)").value || "Not specified"
+  // Helper to safely get element value
+  const getValue = (id) => {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : "Not specified";
   };
+  
+  // Helper to safely get textarea value
+  const getTextarea = (id) => {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : "None";
+  };
+  
+  // Helper to get checked checkboxes from a container
+  const getChecked = (selector) => {
+    return Array.from(document.querySelectorAll(selector)).map(c => c.parentElement.innerText.trim()).join(", ") || "None selected";
+  };
+
+  const config = getValue("f_config");
+  const numBedrooms = bhkToBedrooms[config] || 0;
+
+  const data = {
+    // --- STEP 1: Your Details ---
+    "Submitted At": new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+    "Name": getValue("f_name"),
+    "Phone": getValue("f_phone"),
+    "Location": getValue("f_location"),
+    "Configuration": config,
+    "Carpet Area (sqft)": getValue("f_area"),
+    "Budget": getValue("f_budget"),
+    "Family Members": getValue("f_family"),
+    "Timeline / Possession": getValue("f_timeline"),
+    "Floor Plan Available": getValue("f_plan"),
+    
+    // --- STEP 2: General Scope ---
+    "General Scope": getChecked("#step2 .form-card:first-of-type .check-grid .check-item input:checked"),
+    "Flooring Preference": getValue("f_flooring_pref"),
+    "Finish Preference": getValue("f_finish_pref"),
+    
+    // --- STEP 2: Living & Dining Area ---
+    "Living & Dining Items": getChecked("#step2 .form-card:nth-of-type(2) .check-grid .check-item input:checked"),
+    "Living & Dining Notes": getTextarea("f_dining_notes"),
+    
+    // --- STEP 2: Kitchen ---
+    "Kitchen Layout": getValue("f_kitchen_layout"),
+    "Kitchen Type": getValue("f_kitchen_type"),
+    "Kitchen Items": getChecked("#step2 .form-card:nth-of-type(3) .check-grid .check-item input:checked"),
+    "Kitchen Notes": getTextarea("f_kitchen_notes"),
+    
+    // --- STEP 3: Bedrooms (Dynamic) ---
+    "Number of Bedrooms": numBedrooms,
+    
+    // Master Bedroom
+    "Master Bedroom Items": numBedrooms >= 1 ? (getChecked("#r_master .room-check-row .check-item input:checked") || "None selected") : "N/A",
+    "Master Bedroom Bed Size": numBedrooms >= 1 ? (getValue("f_master_bed_size") || "Not specified") : "N/A",
+    "Master Bedroom Notes": numBedrooms >= 1 ? (getTextarea("f_master_notes") || "None") : "N/A",
+    
+    // Bedroom 2
+    "Bedroom 2 User": numBedrooms >= 2 ? (getValue("f_bed2_user") || "Not specified") : "N/A",
+    "Bedroom 2 Items": numBedrooms >= 2 ? (getChecked("#r_bed2 .room-check-row .check-item input:checked") || "None selected") : "N/A",
+    "Bedroom 2 Notes": numBedrooms >= 2 ? (getTextarea("f_bed2_notes") || "None") : "N/A",
+    
+    // Bedroom 3
+    "Bedroom 3 User": numBedrooms >= 3 ? (getValue("f_bed3_user") || "Not specified") : "N/A",
+    "Bedroom 3 Items": numBedrooms >= 3 ? (getChecked("#r_bed3 .room-check-row .check-item input:checked") || "None selected") : "N/A",
+    "Bedroom 3 Notes": numBedrooms >= 3 ? (getTextarea("f_bed3_notes") || "None") : "N/A",
+    
+    // Bedroom 4
+    "Bedroom 4 User": numBedrooms >= 4 ? (getValue("f_bed4_user") || "Not specified") : "N/A",
+    "Bedroom 4 Items": numBedrooms >= 4 ? (getChecked("#r_bed4 .room-check-row .check-item input:checked") || "None selected") : "N/A",
+    "Bedroom 4 Notes": numBedrooms >= 4 ? (getTextarea("f_bed4_notes") || "None") : "N/A",
+    
+    // --- STEP 4: Bathrooms ---
+    "Bathroom Items": getChecked("#step4 .check-grid .check-item input:checked"),
+    "Bathroom Notes": getTextarea("f_bathroom_notes"),
+    
+    // --- STEP 5: Final Preferences ---
+    "Colour / Material Preferences": getTextarea("f_colour_pref"),
+    "Special Requirements": getTextarea("f_special_req"),
+    "Appliances": getTextarea("f_appliances"),
+    "BOQ Options Needed": getValue("f_boq_options"),
+    "How They Heard": getValue("f_how_heard")
+  };
+  
   return data;
 }
 
 function submitForm() {
+  if (!validateFinalSubmission()) {
+    return;
+  }
+  
   if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === "YOUR_APPS_SCRIPT_URL_HERE") {
     alert("⚠️ Please update the APPS_SCRIPT_URL at the top of the script before submitting.");
     return;
