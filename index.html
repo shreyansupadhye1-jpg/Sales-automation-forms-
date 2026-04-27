@@ -434,6 +434,11 @@ footer span{color:var(--accent);}
 </footer>
 
 <script>
+// ═══════════════════════════════════════════════════════════════
+// PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE ↓
+// ═══════════════════════════════════════════════════════════════
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxerAGvifn6rYaR9Inj5cvX1yCvRRx2YNArr2-a32I6IbvV6wPtkehTL3ZVK8l1w5Q/exec";
+
 const steps = 5;
 const stepLabels = [
   "Step 1 of 5 — Your Details",
@@ -470,10 +475,76 @@ function toggleRoom(btn, id) {
   btn.classList.toggle("active", !isOpen);
 }
 
+function collectFormData() {
+  const data = {
+    "Submitted At": new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+    "Name": document.getElementById("f_name").value.trim(),
+    "Phone": document.getElementById("f_phone").value.trim(),
+    "Location": document.getElementById("f_location").value.trim(),
+    "Configuration": document.getElementById("f_config").value,
+    "Carpet Area (sqft)": document.getElementById("f_area").value || "Not specified",
+    "Budget": document.getElementById("f_budget").value || "Not specified",
+    "Family Members": document.getElementById("f_family").value || "Not specified",
+    "Timeline / Possession": document.getElementById("f_timeline").value || "Not specified",
+    "Floor Plan Available": document.getElementById("f_plan").value || "Not specified",
+    
+    // General Scope
+    "General Scope": Array.from(document.querySelectorAll("#step2 .check-grid:first-of-type .check-item input:checked")).map(c => c.parentElement.innerText.trim()).join(", ") || "None selected",
+    "Flooring Preference": document.querySelector("#step2 .form-row-2:nth-of-type(1) select").value || "Not specified",
+    "Finish Preference": document.querySelector("#step2 .form-row-2:nth-of-type(1) select:nth-of-type(2)").value || "Not specified",
+    
+    // Living & Dining
+    "Living & Dining Items": Array.from(document.querySelectorAll("#step2 .form-card:nth-of-type(2) .check-grid .check-item input:checked")).map(c => c.parentElement.innerText.trim()).join(", ") || "None selected",
+    "Living & Dining Notes": document.querySelector("#step2 .form-card:nth-of-type(2) textarea").value || "None",
+    
+    // Kitchen
+    "Kitchen Layout": document.querySelector("#step2 .form-card:nth-of-type(3) select").value || "Not specified",
+    "Kitchen Type": document.querySelector("#step2 .form-card:nth-of-type(3) select:nth-of-type(2)").value || "Not specified",
+    "Kitchen Items": Array.from(document.querySelectorAll("#step2 .form-card:nth-of-type(3) .check-grid .check-item input:checked")).map(c => c.parentElement.innerText.trim()).join(", ") || "None selected",
+    "Kitchen Notes": document.querySelector("#step2 .form-card:nth-of-type(3) textarea").value || "None",
+    
+    // Bedrooms (from accordion)
+    "Master Bedroom": document.querySelector("#r_master textarea").value || "None",
+    "Bedroom 2": document.querySelector("#r_bed2 textarea").value || "None",
+    "Bedroom 3": document.querySelector("#r_bed3 textarea").value || "None",
+    "Bedroom 4 / Extra": document.querySelector("#r_bed4 textarea").value || "None",
+    
+    // Bathrooms
+    "Bathroom Items": Array.from(document.querySelectorAll("#step4 .check-grid .check-item input:checked")).map(c => c.parentElement.innerText.trim()).join(", ") || "None selected",
+    "Bathroom Notes": document.querySelector("#step4 textarea").value || "None",
+    
+    // Final preferences
+    "Colour / Material Preferences": document.querySelector("#step5 .form-row:nth-of-type(1) textarea").value || "None",
+    "Special Requirements": document.querySelector("#step5 .form-row:nth-of-type(2) textarea").value || "None",
+    "Appliances": document.querySelector("#step5 .form-row:nth-of-type(3) textarea").value || "None",
+    "BOQ Options Needed": document.querySelector("#step5 .form-row-2 select").value || "Not specified",
+    "How They Heard": document.querySelector("#step5 .form-row-2 select:nth-of-type(2)").value || "Not specified"
+  };
+  return data;
+}
+
 function submitForm() {
-  document.getElementById("formWrap").style.display = "none";
-  document.getElementById("successScreen").style.display = "block";
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL === "YOUR_APPS_SCRIPT_URL_HERE") {
+    alert("⚠️ Please update the APPS_SCRIPT_URL at the top of the script before submitting.");
+    return;
+  }
+
+  const formData = collectFormData();
+
+  // Send to Google Apps Script
+  fetch(APPS_SCRIPT_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(formData)
+  })
+  .then(() => {
+    // Show success screen regardless (because no-cors doesn't return response)
+    document.getElementById("formWrap").style.display = "none";
+    document.getElementById("successScreen").style.display = "block";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  })
+  .catch(err => console.error("Submission error:", err));
 }
 </script>
 </body>
